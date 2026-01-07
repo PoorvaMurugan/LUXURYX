@@ -1050,7 +1050,7 @@ downloadBtn.addEventListener("click", () => {
 
   // 🔽 Trigger brochure download
   const link = document.createElement("a");
-  link.href = "assets/brochure/LuxuryXBrochure.pdf"; // 👈 your brochure path
+  link.href = "lp/assets/brochure/LuxuryXBrochure.pdf"; // 👈 your brochure path
   link.download = "LuxuryXBrochure.pdf";
   document.body.appendChild(link);
   link.click();
