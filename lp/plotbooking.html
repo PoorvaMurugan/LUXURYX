@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Plot Booking System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .parking-lot {
+            display: flex;
+            flex-direction: column;
+            width: max-content;
+        }
+        .top-row, .bottom-row {
+            display: flex;
+            flex-direction: row;
+        }
+        .road {
+            height: 20px;
+            background: #ccc;
+            text-align: center;
+            overflow: hidden;
+        }
+        .spot-group {
+            display: flex;
+            flex-direction: row;
+        }
+        .spot {
+            width: 40px;
+            height: 30px;
+            background: #cd853f; /* brown default */
+            margin: 2px;
+            text-align: center;
+            line-height: 30px;
+            color: white;
+            cursor: pointer;
+            font-size: 12px;
+        }
+        .spot.available {
+            background: green;
+        }
+        .spot.booked {
+            background: red;
+        }
+        .spot.advance {
+            background: yellow;
+            color: black;
+        }
+        .spacer {
+            width: 50px;
+        }
+        .park {
+            width: 522px;
+            height: 30px;
+            background: limegreen;
+            margin: 2px;
+            text-align: center;
+            line-height: 30px;
+            color: black;
+        }
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Real Estate Plot Booking System</h1>
+    <div class="parking-lot">
+        <div class="top-row">
+            <div class="spot-group">
+                <div class="spot" id="p1-2">1,2</div>
+                <div class="spot" id="p3">3</div>
+                <div class="spot" id="p4">4</div>
+                <div class="spot" id="p5">5</div>
+                <div class="spot" id="p6">6</div>
+                <div class="spot" id="p7">7</div>
+                <div class="spot" id="p8">8</div>
+                <div class="spot" id="p9">9</div>
+                <div class="spot" id="p10">10</div>
+                <div class="spot" id="p11">11</div>
+            </div>
+            <div class="spacer"></div>
+            <div class="spot-group">
+                <div class="spot" id="p12">12</div>
+                <div class="spot" id="p13">13</div>
+                <div class="spot" id="p14">14</div>
+                <div class="spot" id="p15">15</div>
+                <div class="spot" id="p16">16</div>
+                <div class="spot" id="p17">17</div>
+                <div class="spot" id="p18">18</div>
+                <div class="spot" id="p19">19</div>
+                <div class="spot" id="p20">20</div>
+                <div class="spot" id="p21">21</div>
+                <div class="spot" id="p22">22</div>
+                <div class="spot" id="p23">23</div>
+            </div>
+            <div class="spacer"></div>
+            <div class="spot-group">
+                <div class="spot" id="p24">24</div>
+                <div class="spot" id="p25">25</div>
+                <div class="spot" id="p26">26</div>
+                <div class="spot" id="p27">27</div>
+                <div class="spot" id="p28">28</div>
+                <div class="spot" id="p29">29</div>
+                <div class="spot" id="p30">30</div>
+                <div class="spot" id="p31">31</div>
+                <div class="spot" id="p32">32</div>
+                <div class="spot" id="p33">33</div>
+            </div>
+            <div class="spacer"></div>
+            <div class="spot-group">
+                <div class="spot" id="p34">34</div>
+                <div class="spot" id="p68">68</div>
+                <div class="park" id="park">PARK</div>
+            </div>
+        </div>
+        <div class="road">Road</div>
+        <div class="bottom-row">
+            <div class="spot-group">
+                <div class="spot" id="p66-67">66,67</div>
+                <div class="spot" id="p65">65</div>
+                <div class="spot" id="p64">64</div>
+                <div class="spot" id="p63">63</div>
+                <div class="spot" id="p62">62</div>
+                <div class="spot" id="p61">61</div>
+                <div class="spot" id="p60">60</div>
+                <div class="spot" id="p59">59</div>
+                <div class="spot" id="p58">58</div>
+                <div class="spot" id="p57">57</div>
+            </div>
+            <div class="spacer"></div>
+            <div class="spot-group">
+                <div class="spot" id="p56">56</div>
+                <div class="spot" id="p55">55</div>
+                <div class="spot" id="p54">54</div>
+                <div class="spot" id="p53">53</div>
+                <div class="spot" id="p52">52</div>
+                <div class="spot" id="p51">51</div>
+                <div class="spot" id="p50">50</div>
+                <div class="spot" id="p49">49</div>
+                <div class="spot" id="p48">48</div>
+                <div class="spot" id="p47">47</div>
+                <div class="spot" id="p46">46</div>
+                <div class="spot" id="p45">45</div>
+            </div>
+            <div class="spacer"></div>
+            <div class="spot-group">
+                <div class="spot" id="p44">44</div>
+                <div class="spot" id="p43">43</div>
+                <div class="spot" id="p42">42</div>
+                <div class="spot" id="p41">41</div>
+                <div class="spot" id="p40">40</div>
+                <div class="spot" id="p39">39</div>
+                <div class="spot" id="p38">38</div>
+                <div class="spot" id="p37">37</div>
+                <div class="spot" id="p36">36</div>
+                <div class="spot" id="p35">35</div>
+            </div>
+            <div class="spacer"></div>
+            <div class="spot-group">
+                <div class="spot" id="p69">69</div>
+                <div class="spot" id="p70">70</div>
+                <div class="spot" id="p71">71</div>
+                <div class="spot" id="p72">72</div>
+                <div class="spot" id="p73">73</div>
+                <div class="spot" id="p74">74</div>
+                <div class="spot" id="p75">75</div>
+                <div class="spot" id="p76">76</div>
+                <div class="spot" id="p77">77</div>
+                <div class="spot" id="p78">78</div>
+                <div class="spot" id="p79">79</div>
+                <div class="spot" id="p80">80</div>
+                <div class="spot" id="pp1">PP1</div>
+                <div class="spot" id="pp2">PP2</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="plot-details"></div>
+            <button id="book-consult">Book Consultation</button>
+            <button id="advance-book">Advance Booking</button>
+        </div>
+    </div>
+
+    <script>
+        var modal = document.getElementById('modal');
+        var close = document.getElementsByClassName('close')[0];
+        var currentPlot = '';
+
+        close.onclick = function() {
+            modal.style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        var plotData = {};
+        var allPlots = ['1,2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31','32','33','34','68','66,67','65','64','63','62','61','60','59','58','57','56','55','54','53','52','51','50','49','48','47','46','45','44','43','42','41','40','39','38','37','36','35','69','70','71','72','73','74','75','76','77','78','79','80','PP1','PP2'];
+        var statuses = ['Available', 'Booked', 'Advance'];
+        var facings = ['North', 'South', 'East', 'West'];
+
+        allPlots.forEach(function(p) {
+            var status = statuses[Math.floor(Math.random() * 3)];
+            plotData[p] = {
+                plotNo: p,
+                bhk: (Math.floor(Math.random() * 3) + 2) + 'BHK',
+                area: Math.floor(Math.random() * 2000) + 1000,
+                pricePer: Math.floor(Math.random() * 5000) + 3000,
+                additional: Math.floor(Math.random() * 500000) + 100000,
+                facing: facings[Math.floor(Math.random() * 4)],
+                status: status
+            };
+        });
+
+        // Set colors based on status
+        document.querySelectorAll('.spot').forEach(function(spot) {
+            var plotNum = spot.textContent.trim();
+            var data = plotData[plotNum];
+            if (data) {
+                spot.classList.add(data.status.toLowerCase());
+            }
+        });
+
+        // Click event for spots
+        document.querySelectorAll('.spot').forEach(function(spot) {
+            spot.addEventListener('click', function() {
+                var plotNum = this.textContent.trim();
+                var data = plotData[plotNum];
+                if (data) {
+                    currentPlot = plotNum;
+                    var details = `
+                        Plot No: ${data.plotNo}<br>
+                        BHK: ${data.bhk}<br>
+                        Build Up Area: ${data.area} sq ft<br>
+                        Price per sq ft: ${data.pricePer}<br>
+                        Additional Charges: ${data.additional}<br>
+                        Facing: ${data.facing}<br>
+                        Booking Status: ${data.status}<br>
+                    `;
+                    document.getElementById('plot-details').innerHTML = details;
+                    modal.style.display = 'block';
+                }
+            });
+        });
+
+        // Button events
+        document.getElementById('book-consult').onclick = function() {
+            alert('Consultation booked for plot ' + currentPlot);
+            modal.style.display = 'none';
+        }
+
+        document.getElementById('advance-book').onclick = function() {
+            var data = plotData[currentPlot];
+            if (data.status === 'Available') {
+                data.status = 'Advance';
+                var spot = Array.from(document.querySelectorAll('.spot')).find(function(s) {
+                    return s.textContent.trim() === currentPlot;
+                });
+                if (spot) {
+                    spot.classList.remove('available');
+                    spot.classList.add('advance');
+                }
+                alert('Advance booking done for plot ' + currentPlot);
+            } else {
+                alert('Plot not available for advance booking');
+            }
+            modal.style.display = 'none';
+        }
+    </script>
+</body>
+</html>
