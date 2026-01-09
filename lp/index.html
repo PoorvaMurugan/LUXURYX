@@ -88,6 +88,12 @@
 </div>
 
 
+
+    <script src="https://cdn.botpress.cloud/webchat/v3.5/inject.js"></script>
+<script src="https://files.bpcontent.cloud/2026/01/09/05/20260109052035-ARAZVVON.js" defer></script>
+    
+
+
 <body>
 
 <div class="page-wrapper">
@@ -1397,6 +1403,11 @@ document.getElementById("downloadBrochureBtn")?.addEventListener("click", async 
   if (!data.name || !data.phone || !data.email) return alert("Fill all fields!");
 
   await saveForm("leads", data);
+
+  // 🔥 Trigger Botpress
+window.botpressWebChat.sendEvent({ type: "brochure-view" });
+window.botpressWebChat.sendEvent({ type: "show" });
+
   alert("Saved! Downloading brochure...");
   window.location.href = "/assets/brochure/LuxuryXBrochure.pdf";
 
@@ -1417,6 +1428,11 @@ document.getElementById("bookCallBtn")?.addEventListener("click", async () => {
   if (!data.name || !data.phone) return alert("Fill all fields!");
 
   await saveForm("leads", data);
+
+  
+  // 🔥 Trigger Botpress
+  window.botpressWebChat.sendEvent({ type: "call-booked" });
+  window.botpressWebChat.sendEvent({ type: "show" });
   alert("Call booked! Our team will call you.");
   document.getElementById("callModal").style.display = "none";
 });
@@ -1436,6 +1452,10 @@ document.getElementById("submitDetails")?.addEventListener("click", async () => 
   if (!data.name || !data.phone) return alert("Fill all fields!");
 
   await saveForm("leads", data);
+
+   // 🔥 Trigger Botpress
+  window.botpressWebChat.sendEvent({ type: "masterplan-unlocked" });
+  window.botpressWebChat.sendEvent({ type: "show" });
 
   alert("Saved! Unlocking master plan...");
 
@@ -1469,6 +1489,11 @@ document.getElementById("customerDetailsForm")?.addEventListener("submit", async
   };
 
   await saveForm("leads", data);
+
+  
+  // 🔥 Trigger Botpress
+  window.botpressWebChat.sendEvent({ type: "plot-check" });
+  window.botpressWebChat.sendEvent({ type: "show" });
   alert("Saved! Showing plot availability...");
   document.getElementById("customerFormModal").style.display = "none";
 });
@@ -1491,11 +1516,21 @@ document.querySelector(".contact-form form")?.addEventListener("submit", async (
   };
 
   await saveForm("leads", data);
+
+  // 🔥 Trigger Botpress
+  window.botpressWebChat.sendEvent({ type: "contact-enquiry" });
+  window.botpressWebChat.sendEvent({ type: "show" }); 
   alert("Thanks! We will contact you soon.");
   form.reset();
 });
 
 
+/************************************
+  🕒 Auto-open chat after 10 seconds
+************************************/
+setTimeout(() => {
+  window.botpressWebChat.sendEvent({ type: "show" });
+}, 10000);
 
 
 
