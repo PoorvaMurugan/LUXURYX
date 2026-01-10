@@ -1506,6 +1506,30 @@ setTimeout(() => {
 }, 10000);
 
 
+/************************************
+ 🚀 CHATBOT LEAD CAPTURE LISTENER
+************************************/
+window.addEventListener("message", async function (event) {
+  if (!event.data || !event.data.payload) return;
+
+  const msg = event.data.payload;
+
+  // When Botpress sends lead data (name, phone, email)
+  if (msg.startsWith("LEAD:")) {
+    const parts = msg.replace("LEAD:", "").split("|");
+
+    let data = {
+      name: parts[0],
+      phone: parts[1],
+      email: parts[2],
+      source: "Chatbot",
+      createdAt: new Date()
+    };
+
+    await saveForm("leads", data);
+    console.log("🔥 Chatbot lead saved to Firestore:", data);
+  }
+});
 
 
 </script>
