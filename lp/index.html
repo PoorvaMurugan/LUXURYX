@@ -723,11 +723,21 @@
   </div>
 </section>
 
-<!-- FLOOR PLAN MODAL -->
+<!-- FLOOR PLAN MODAL (SLIDER) -->
 <div id="floorModal" class="floor-modal">
-  <span class="floor-close" onclick="closeGallery()">×</span>
-  <div id="floorGallery" class="floor-gallery"></div>
+  <div class="floor-modal-inner">
+    <span class="floor-close" id="floorCloseBtn">×</span>
+
+    <div class="swiper floorSwiper">
+      <div class="swiper-wrapper" id="floorGallery"></div>
+
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
+      <div class="swiper-pagination"></div>
+    </div>
+  </div>
 </div>
+
 
 	<!-- End Property One -->
 	
@@ -1213,22 +1223,14 @@
                   </li>
 
                   <li>
-                    <span class="flaticon-world"></span>
+                    <span class="flaticon-globe"></span>
                     <a href="https://www.manjugroups.in" target="_blank" rel="noopener noreferrer">
                       www.manjugroups.in
                     </a>
                   </li>
                 </ul>
 
-                <!-- Social Icons OUTSIDE the UL (fixed) -->
-                <div class="footer_socials">
-                  <a href="https://wa.me/9197444333666" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
-                  <a href="https://www.instagram.com/manjugroups_official" target="_blank"><i class="fa-brands fa-instagram"></i></a>
-                  <a href="https://www.youtube.com/@ManjuGroup" target="_blank"><i class="fa-brands fa-youtube"></i></a>
-                  <a href="https://www.facebook.com/manjufoundations/" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
-                  <a href="https://linkedin.com/company/manju-infraprojects-llp" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
-                </div>
-
+          
               </div>
             </div>
 
@@ -1264,6 +1266,7 @@
         </div>
 
         <div class="footer_socials">
+          <a href="https://wa.me/9197444333666" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
           <a href="https://www.facebook.com/manjufoundations/" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
           <a href="https://www.instagram.com/manjugroups_official" target="_blank"><i class="fa-brands fa-instagram"></i></a>
           <a href="https://linkedin.com/company/manju-infraprojects-llp" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
@@ -1534,5 +1537,5 @@ window.addEventListener("message", async function (event) {
 
 </script>
 
-</body>
-</html>
+</body>  
+</html> 

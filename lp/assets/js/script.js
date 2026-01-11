@@ -459,51 +459,35 @@
 	
 	// Two Items Slider
 	var slider = new Swiper('.two-items_slider', {
-		slidesPerView: 2,
-		spaceBetween: 30,
-		loop: true,
-		autoHeight: true,
-		//centeredSlides: true,
-		autoplay: {
-			enabled: true,
-			delay: 6000
-		},
-		// Navigation arrows
-		navigation: {
-			nextEl: '.two-items_slider-next',
-			prevEl: '.two-items_slider-prev',
-			clickable: true,
-		},
-		//Pagination
-		pagination: {
-			el: ".two-items_slider-pagination",
-			clickable: true,
-		},
-		speed: 500,
-		breakpoints: {
-			'1600': {
-				slidesPerView: 2,
-			},
-			'1200': {
-				slidesPerView: 2,
-			},
-			'1100': {
-				slidesPerView: 2,
-			},
-			'992': {
-				slidesPerView: 2,
-			},
-			'768': {
-				slidesPerView: 1,
-			},
-			'576': {
-				slidesPerView: 1,
-			},
-			'0': {
-				slidesPerView: 1,
-			},
-		},
-	});
+  slidesPerView: 2,
+  spaceBetween: 30,
+  loop: true,
+  autoHeight: true,
+  autoplay: {
+    enabled: true,
+    delay: 2500,   // FAST
+  },
+  navigation: {
+    nextEl: '.two-items_slider-next',
+    prevEl: '.two-items_slider-prev',
+    clickable: true,
+  },
+  pagination: {
+    el: ".two-items_slider-pagination",
+    clickable: true,
+  },
+  speed: 600,       // Animation speed
+  breakpoints: {
+    '1600': { slidesPerView: 2 },
+    '1200': { slidesPerView: 2 },
+    '1100': { slidesPerView: 2 },
+    '992': { slidesPerView: 2 },
+    '768': { slidesPerView: 1 },
+    '576': { slidesPerView: 1 },
+    '0': { slidesPerView: 1 },
+  },
+});
+
 	
 	
 	
@@ -948,6 +932,11 @@ document.addEventListener("DOMContentLoaded", function () {
 /* ==============================
    FLOOR PLAN GALLERY MODAL
 ================================ */
+/* ==============================
+   FLOOR PLAN GALLERY MODAL
+================================ */
+
+let floorSwiper = null;
 
 function openGallery(images) {
   const modal = document.getElementById("floorModal");
@@ -955,35 +944,55 @@ function openGallery(images) {
 
   if (!modal || !gallery) return;
 
-  // Clear old images
   gallery.innerHTML = "";
 
-  // Add new images (1–4 supported)
-  images.forEach((src) => {
-    const img = document.createElement("img");
-    img.src = src;
-    img.alt = "Floor Plan Image";
-    gallery.appendChild(img);
+  images.forEach(src => {
+    gallery.innerHTML += `
+      <div class="swiper-slide">
+        <img src="${src}" alt="Floor Plan">
+      </div>`;
   });
 
-  // Show modal
   modal.style.display = "flex";
+
+  // Destroy previous slider if exists
+  if (floorSwiper) floorSwiper.destroy();
+
+  floorSwiper = new Swiper('.floorSwiper', {
+    loop: false,
+    centeredSlides: true,
+    speed: 600,
+    effect: "slide",
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true
+    },
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev'
+    }
+  });
 }
 
-/* Close modal */
 function closeGallery() {
-  const modal = document.getElementById("floorModal");
-  if (modal) modal.style.display = "none";
+  document.getElementById("floorModal").style.display = "none";
 }
 
-/* Close modal when clicking outside images */
-document.addEventListener("click", function (e) {
-  const modal = document.getElementById("floorModal");
-  const gallery = document.getElementById("floorGallery");
+/* X button close */
+document.getElementById("floorCloseBtn")?.addEventListener("click", () => {
+  closeGallery();
+});
 
-  if (!modal || modal.style.display !== "flex") return;
+/* Close only when clicking background */
+document.getElementById("floorModal").addEventListener("click", function (e) {
+  if (e.target.id === "floorModal") {
+    closeGallery();
+  }
+});
 
-  if (!gallery.contains(e.target) && !e.target.classList.contains("floor-btn")) {
+/* ESC key close support */
+document.addEventListener("keydown", function (e) {
+  if (e.key === "Escape") {
     closeGallery();
   }
 });

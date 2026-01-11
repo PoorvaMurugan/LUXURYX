@@ -244,11 +244,7 @@
 	background-color: rgba(var(--main-color-rgb), 0.10);
 }
 
-.footer-contact_list li:nth-child(2) a{
-	font-size:24px;
-	font-weight:700;
-	border-bottom:1px solid var(--white-color);
-}
+
 
 .footer-contact_list li a{
 	position:relative;
@@ -520,3 +516,4 @@
   text-transform:uppercase;
   letter-spacing:0.5px;
 }
+
