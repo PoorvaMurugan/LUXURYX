@@ -8547,3 +8547,14 @@ body, p, span, li, a, h1, h2, h3, h4, h5, h6 {
   border-radius: 50px !important;
 }
 
+/* Fix giant brochure button width */
+.story-one_button a {
+  display: inline-block !important;
+  width: auto !important;
+  padding-left: 32px !important;
+  padding-right: 32px !important;
+}
+
+.story-one_button a.theme-btn {
+  max-width: fit-content !important;
+}
